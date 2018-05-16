@@ -12,9 +12,9 @@ This package provides a trait that will automatic handlind upload when saving/up
 ##Requires
   
 - php: >=7.0.0
-- illuminate/http: ^5.0,
-- illuminate/database": ^5.0,
-- illuminate/contracts": ^5.0
+- illuminate/database: ^5.0
+- illuminate/support: ^5.0
+- illuminate/validation: ^5.0
   
 ## Installation
 

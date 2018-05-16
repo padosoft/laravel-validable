@@ -26,7 +26,7 @@ trait Validable
     /**
      * Validator instance
      *
-     * @var Illuminate\Validation\Validators
+     * @var Illuminate\Validation\Factory
      */
     protected $validator = null;
 
