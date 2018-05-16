@@ -12,12 +12,9 @@ This package provides a trait that will automatic handlind upload when saving/up
 ##Requires
   
 - php: >=7.0.0
-- illuminate/database: ^5.0
-- illuminate/support: ^5.0
-- illuminate/http: ^5.0
-- padosoft/laravel-request: ^1.0
-- padosoft/io: ^1.0
-- padosoft/support: ^1.0
+- illuminate/http: ^5.0,
+- illuminate/database": ^5.0,
+- illuminate/contracts": ^5.0
   
 ## Installation
 
@@ -93,6 +90,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 If you discover any security related issues, please email instead of using the issue tracker.
 
 ## Credits
+Inspired by https://github.com/JeffreyWay/Laravel-Model-Validation
 - [Lorenzo Padovani](https://github.com/lopadova)
 - [Leonardo Padovani](https://github.com/leopado)
 - [All Contributors](../../contributors)
