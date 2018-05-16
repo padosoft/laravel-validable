@@ -1,0 +1,43 @@
+{
+    "name": "padosoft/laravel-validable",
+    "description": "Laravel package for automatic upload handling with trait",
+    "keywords": [
+        "padosoft",
+        "laravel-validable"
+    ],
+    "homepage": "https://github.com/padosoft/laravel-validable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Padovani",
+            "email": "helpdesk@padosoft.com",
+            "homepage": "https://www.padosoft.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=7.0.0",
+        "illuminate/http": "^5.0",
+        "illuminate/database": "^5.0",
+        "illuminate/contracts": "^5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.3.0|~3.4.2|^3.5.0",
+        "phpunit/phpunit" : "^5.7|6.2|^7.0",
+        "mockery/mockery": "^0.9.5",
+        "padosoft/test": "^0.2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Padosoft\\Laravel\\Validable\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Padosoft\\Laravel\\Validable\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}

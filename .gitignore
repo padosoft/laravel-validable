@@ -1,0 +1,4 @@
+build
+docs
+vendor
+tests/Integration/temp

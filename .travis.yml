@@ -1,0 +1,27 @@
+language: php
+
+php:
+  - 7.0
+  - 7.1
+
+env:
+  matrix:
+    - COMPOSER_FLAGS=""
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+  - chmod 777 -R ./
+  - chmod 777 -R /home/travis/build/padosoft/laravel-validable/tests
+  - chmod 777 -R /home/travis/build/padosoft/laravel-validable/tests/Integration
+  - mkdir /home/travis/build/padosoft/laravel-validable/tests/Integration/resources
+  - chmod 777 -R /home/travis/build/padosoft/laravel-validable/tests/Integration/resources
+  - mkdir /home/travis/build/padosoft/laravel-validable/tests/Integration/resources/subdir
+  - chmod 777 -R /home/travis/build/padosoft/laravel-validable/tests/Integration/resources/subdir
+
+script:
+  - phpunit --coverage-text --coverage-clover=coverage.clover
+
+after_script:
+  #- wget https://scrutinizer-ci.com/ocular.phar
+  #- php vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover
