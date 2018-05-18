@@ -56,7 +56,8 @@ trait Validable
      */
     public function validate()
     {
-        $v = $this->validator->make($this->attributes, static::getRules(), static::getMessages());
+        $v = $this->validator->make($this->attributes,
+            $this->exists ? static::getUpdatingRules($this) : static::getCreatingRules(), static::getMessages());
         if ($v->passes()) {
             return true;
         }
@@ -80,7 +81,7 @@ trait Validable
      */
     public function getErrors()
     {
-        return $this->errors!==null?$this->errors:[];
+        return $this->errors !== null ? $this->errors : [];
     }
 
     /**
@@ -95,7 +96,8 @@ trait Validable
      * Return true if the validation is passed and the model was saved on db
      * @return bool
      */
-    public function wasSaved(){
+    public function wasSaved()
+    {
         return empty($this->errors);
     }
 
@@ -107,6 +109,43 @@ trait Validable
         }
 
         return [];
+    }
+
+    public static function getCreatingRules()
+    {
+        if (isset(static::$rules)) {
+            return static::$rules;
+        }
+
+        return [];
+    }
+
+    protected static function replacePlaceholders(Model $model, $rules)
+    {
+        $replaced = [];
+        foreach ($rules as $key => $rule) {
+            foreach ($model->attributes as $attr => $val) {
+                $rule = str_replace('{' . $attr . '}', $val, $rule);
+            }
+            $replaced[$key] = $rule;
+        }
+
+        return $replaced;
+    }
+
+    public static function getUpdatingRules(Model $model)
+    {
+        $rules = [];
+
+        if (isset(static::$rules)) {
+            $rules = static::$rules;
+        }
+
+        if (isset(static::$updating_rules)) {
+            $rules = static::$updating_rules;
+        }
+
+        return static::replacePlaceholders($model, $rules);
     }
 
     public static function getMessages()

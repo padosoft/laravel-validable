@@ -1,4 +1,4 @@
-# Auto upload handling with Eloquent models trait
+# Trait to activate validation when saving Eloquent Model
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/padosoft/laravel-validable.svg?style=flat-square)](https://packagist.org/packages/padosoft/laravel-validable)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -53,6 +53,25 @@ class YourEloquentModel extends Model
         ];
 }
 ```
+You can write specific validation for only update method
+```php
+class YourEloquentModel extends Model
+{
+    use Validable;
+    protected static $rules = [
+            'name'=>'required|max:10|unique:table,field',
+            'order'=>'sometimes|integer|max:10',
+        ];
+    protected static $updating_rules = [
+                'name'=>'required|max:10|unique:table,field,[id]',
+                'order'=>'sometimes|integer|max:10',
+            ];
+        protected static $messages = [
+            'name.required'=>'obbligatorio'
+        ];
+}
+```
+**Note:** [id] will be overwritten at runtime with the model property.
 
 You can check if your model is saved like this:
 

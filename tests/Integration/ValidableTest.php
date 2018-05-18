@@ -72,13 +72,56 @@ class ValidableTest extends TestCase
         $model->name = 'test';
         $model->save();
         */
-        $rules=TestModel::getRules();
-        $messages=TestModel::getMessages();
+        $rules = TestModel::getRules();
+        $messages = TestModel::getMessages();
         $this->assertEquals(count($rules), 2);
         $this->assertEquals(count($messages), 1);
 
     }
 
+    /** @test */
+    public function testCanGetRulesSpecificRulesOfAModel()
+    {
+        /*
+        $model = TestModel::create();
+        $model->name = 'test';
+        $model->save();
+        */
+        $model = new TestModel();
+        $rules = TestModelWithSpecificRules::getRules();
+        $CreatingRules = TestModelWithSpecificRules::getCreatingRules();
+        $UpdatingRules = TestModelWithSpecificRules::getUpdatingRules($model);
+
+        $this->assertEquals($rules, $CreatingRules);
+        $this->assertNotEquals($rules, $UpdatingRules);
+
+    }
+
+    /** @test */
+    public function testUpdateRulesWithReplacement()
+    {
+        /*
+        $model = TestModel::create();
+        $model->name = 'test';
+        $model->save();
+        */
+        $model = new TestModelWithSpecificRules();
+        $model->name = 'test';
+        $save = $model->save();
+
+        $model->order = 1;
+        $update = $model->save();
+
+        $model2 = new TestModelWithSpecificRules();
+        $model2->name = 'test';
+        $save2 = $model2->save();
+
+        $this->assertEquals($save, true);
+        $this->assertEquals($update, true);
+        $this->assertEquals($save2, false);
+
+
+    }
 
 
 }

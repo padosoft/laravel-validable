@@ -1,6 +1,6 @@
 {
     "name": "padosoft/laravel-validable",
-    "description": "Laravel package for automatic upload handling with trait",
+    "description": "Trait to activate validation when saving Eloquent Model",
     "keywords": [
         "padosoft",
         "laravel-validable"
