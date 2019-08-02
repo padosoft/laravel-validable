@@ -36,8 +36,9 @@ trait Validable
             if (!$model->hasValidator()) {
                 $model->setValidator(App::make('validator'));
             }
-
-            return $model->validate();
+			if (!$model->validate()){
+				return false;
+			}
         });
     }
 
