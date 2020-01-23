@@ -126,7 +126,9 @@ trait Validable
         $replaced = [];
         foreach ($rules as $key => $rule) {
             foreach ($model->attributes as $attr => $val) {
-                $rule = str_replace('{' . $attr . '}', $val, $rule);
+				if(strpos($rule,$attr)!==false && is_scalar($val)){
+					$rule = str_replace('{' . $attr . '}', $val, $rule);
+				}
             }
             $replaced[$key] = $rule;
         }
