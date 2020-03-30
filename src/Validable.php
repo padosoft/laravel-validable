@@ -33,10 +33,7 @@ trait Validable
     protected static function bootValidable()
     {
         static::saving(function (Model $model) {
-            if (!$model->hasValidator()) {
-                $model->setValidator(App::make('validator'));
-            }
-			if (!$model->validate()){
+            if (!$model->validate()){
 				return false;
 			}
         });
@@ -57,6 +54,10 @@ trait Validable
      */
     public function validate()
     {
+        if (!$this->hasValidator()) {
+            $this->setValidator(App::make('validator'));
+        }
+
         $v = $this->validator->make($this->attributes,
             $this->exists ? static::getUpdatingRules($this) : static::getCreatingRules(), static::getMessages());
         if ($v->passes()) {
