@@ -8,6 +8,7 @@ namespace Padosoft\Laravel\Validable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Illuminate\Validation\Factory as ValidatorFactory;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Trait Validable
@@ -64,7 +65,17 @@ trait Validable
             return true;
         }
         $this->setErrors($v->messages());
+        if ($this->validateBase()){
+            return true;
+        }
 
+        Log::debug('Errore durante la validazione del model \''.$this->getTable().'\' in \''.($this->id>0 ? 'update' : 'create').'\' lanciato su evento saving del model.');
+        Log::debug('Attributi del model:');
+        Log::debug($this->attributesToArray());
+        Log::debug('Errori di validazione:');
+        Log::debug($this->getErrors());
+
+        //throw ValidationException::withMessages($this->getErrors());
         return false;
     }
 
