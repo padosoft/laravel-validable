@@ -7,14 +7,15 @@ namespace Padosoft\Laravel\Validable;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Factory as ValidatorFactory;
 use Illuminate\Validation\ValidationException;
 
 /**
  * Trait Validable
  * @package Padosoft\Laravel\Validable
- * @property Array $rules Validation rules
- * @property Array $messages Validation messages
+ * @property array $rules Validation rules
+ * @property array $messages Validation messages
  */
 trait Validable
 {
@@ -34,9 +35,9 @@ trait Validable
     protected static function bootValidable()
     {
         static::saving(function (Model $model) {
-            if (!$model->validate()){
-				return false;
-			}
+            if (!$model->validate()) {
+                return false;
+            }
         });
     }
 
@@ -60,22 +61,23 @@ trait Validable
         }
 
         $v = $this->validator->make($this->attributes,
-            $this->exists ? static::getUpdatingRules($this) : static::getCreatingRules(), static::getMessages());
+                                    $this->exists ? static::getUpdatingRules($this) : static::getCreatingRules(), static::getMessages());
         if ($v->passes()) {
             return true;
         }
         $this->setErrors($v->messages());
-        if ($this->validateBase()){
+        if ($this->validateBase()) {
             return true;
         }
 
-        Log::debug('Errore durante la validazione del model \''.$this->getTable().'\' in \''.($this->id>0 ? 'update' : 'create').'\' lanciato su evento saving del model.');
-        Log::debug('Attributi del model:');
-        Log::debug($this->attributesToArray());
-        Log::debug('Errori di validazione:');
-        Log::debug($this->getErrors());
+        if (config('laravel-validable.debug')) {
+            Log::debug('Errore durante la validazione del model \'' . $this->getTable() . '\' in \'' . ($this->id > 0 ? 'update' : 'create') . '\' lanciato su evento saving del model.');
+            Log::debug('Attributi del model:');
+            Log::debug(implode(PHP_EOL, $this->attributesToArray()));
+            Log::debug('Errori di validazione:');
+            Log::debug($this->getErrors());
+        }
 
-        //throw ValidationException::withMessages($this->getErrors());
         return false;
     }
 
@@ -138,9 +140,9 @@ trait Validable
         $replaced = [];
         foreach ($rules as $key => $rule) {
             foreach ($model->attributes as $attr => $val) {
-				if(strpos($rule,$attr)!==false && is_scalar($val)){
-					$rule = str_replace('{' . $attr . '}', $val, $rule);
-				}
+                if (strpos($rule, $attr) !== false && is_scalar($val)) {
+                    $rule = str_replace('{' . $attr . '}', $val, $rule);
+                }
             }
             $replaced[$key] = $rule;
         }

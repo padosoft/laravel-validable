@@ -37,6 +37,13 @@
             "Padosoft\\Laravel\\Validable\\Test\\": "tests"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Padosoft\\Laravel\\Validable\\ValidableServiceProvider"
+            ]
+        }
+    },
     "scripts": {
         "test": "phpunit"
     }
