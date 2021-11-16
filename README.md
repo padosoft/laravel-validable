@@ -2,19 +2,18 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/padosoft/laravel-validable.svg?style=flat-square)](https://packagist.org/packages/padosoft/laravel-validable)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/padosoft/laravel-validable/master.svg?style=flat-square)](https://travis-ci.org/padosoft/laravel-validable)
+[![CircleCI](https://circleci.com/gh/padosoft/laravel-validable/tree/master.svg?style=svg)](https://circleci.com/gh/padosoft/laravel-settings/tree/master)
 [![Quality Score](https://img.shields.io/scrutinizer/g/padosoft/laravel-validable.svg?style=flat-square)](https://scrutinizer-ci.com/g/padosoft/laravel-validable)
 [![Total Downloads](https://img.shields.io/packagist/dt/padosoft/laravel-validable.svg?style=flat-square)](https://packagist.org/packages/padosoft/laravel-validable)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/4570b2c7-71c6-4b11-9214-da078fb51a98.svg?style=flat-square)](https://insight.sensiolabs.com/projects/4570b2c7-71c6-4b11-9214-da078fb51a98)
 
 This package provides a trait that will automatic handlind upload when saving/updating/deleting any Eloquent model with upload form request.
 
 ##Requires
   
 - php: >=7.0.0
-- illuminate/database: ^5.0
-- illuminate/support: ^5.0
-- illuminate/validation: ^5.0
+- illuminate/database: ^5.0|^6.0|^7.0|^8.0
+- illuminate/support: ^5.0|^6.0|^7.0|^8.0
+- illuminate/validation: ^5.0|^6.0|^7.0|^8.0
   
 ## Installation
 
