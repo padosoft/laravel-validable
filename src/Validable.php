@@ -73,6 +73,12 @@ trait Validable
             Log::debug(implode(PHP_EOL, $this->attributesToArray()));
             Log::debug('Errori di validazione:');
             Log::debug($this->getErrors());
+            Log::debug('StackTrace:'.PHP_EOL);
+            ob_start();
+            debug_print_backtrace();
+            $StackTrace = ob_get_contents();
+            ob_end_clean();
+            Log::debug($StackTrace);
         }
 
         return false;
