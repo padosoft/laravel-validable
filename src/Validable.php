@@ -70,7 +70,7 @@ trait Validable
         if (config('laravel-validable.debug')) {
             Log::debug('Errore durante la validazione del model \'' . $this->getTable() . '\' in \'' . ($this->id > 0 ? 'update' : 'create') . '\' lanciato su evento saving del model.');
             Log::debug('Attributi del model:');
-            Log::debug(implode(PHP_EOL, $this->attributesToArray()));
+            Log::debug($this->toJson(JSON_PRETTY_PRINT));
             Log::debug('Errori di validazione:');
             Log::debug($this->getErrors());
             Log::debug('StackTrace:'.PHP_EOL);
