@@ -14,7 +14,7 @@ class ValidableServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->publishes([
-                             __DIR__ . '/config/config.php' => config_path('padosoft-notification.php')
+                             __DIR__ . '/config/config.php' => config_path('laravel-validable.php')
                          ], 'config');
     }
 
