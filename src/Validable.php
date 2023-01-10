@@ -68,17 +68,18 @@ trait Validable
         $this->setErrors($v->messages());
 
         if (config('laravel-validable.debug')) {
-            Log::debug('Errore durante la validazione del model \'' . $this->getTable() . '\' in \'' . ($this->id > 0 ? 'update' : 'create') . '\' lanciato su evento saving del model.');
-            Log::debug('Attributi del model:');
-            Log::debug($this->toJson(JSON_PRETTY_PRINT));
-            Log::debug('Errori di validazione:');
-            Log::debug($this->getErrors());
-            Log::debug('StackTrace:'.PHP_EOL);
+            $msg = 'Errore durante la validazione del model \'' . $this->getTable() . '\' in \'' . ($this->id > 0 ? 'update' : 'create') . '\' lanciato su evento saving del model.';
+            $msg .= 'Attributi del model:';
+            $msg .= $this->toJson(JSON_PRETTY_PRINT);
+            $msg .= 'Errori di validazione:';
+            $msg .= $this->getErrors();
+            $msg .= 'StackTrace:'.PHP_EOL;
             ob_start();
             debug_print_backtrace();
             $StackTrace = ob_get_contents();
             ob_end_clean();
-            Log::debug($StackTrace);
+            $msg .= $StackTrace;
+            Log::debug($msg);
         }
 
         return false;
