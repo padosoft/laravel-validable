@@ -72,8 +72,15 @@ trait Validable
             $msg .= 'Attributi del model:';
             $msg .= $this->toJson(JSON_PRETTY_PRINT);
             $msg .= 'Errori di validazione:';
-            $msg .= $this->getErrors();
-            $msg .= 'StackTrace:'.PHP_EOL;
+            $getErrors = $this->getErrors();
+            try {
+                if (count($getErrors) > 0) {
+                    $msg .= json_encode($getErrors, JSON_PRETTY_PRINT);
+                }
+            } catch (\Throwable $e) {
+                $msg .= $e->getMessage();
+            }
+            $msg .= 'StackTrace:' . PHP_EOL;
             ob_start();
             debug_print_backtrace();
             $StackTrace = ob_get_contents();
