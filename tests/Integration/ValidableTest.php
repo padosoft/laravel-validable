@@ -26,6 +26,37 @@ class ValidableTest extends TestCase
     }
 
     /** @test */
+    public function testSaveValidAttributesWithHiddenAttributes()
+    {
+        $model = new TestModelWithHiddenAttributes();
+        $model->name = 'test';
+        //$model->order = 1;
+        $ret = $model->save();
+        $this->assertDatabaseHas('test_models', [
+            'name' => 'test'
+        ]);
+        $this->assertEquals($ret, true);
+        $this->assertEquals($model->hasErrors(), false);
+    }
+
+    /** @test */
+    public function testSaveValidDatesAttributes()
+    {
+        $model = new TestModelWithDates();
+        $model->name = 'test';
+        $model->date_test = date('Y-m-d');
+        $model->datetime_test = date('Y-m-d H:i:s');
+        //$model->order = 1;
+        $ret = $model->save();
+        $this->assertDatabaseHas('test_models_with_dates', [
+            'name' => 'test'
+        ]);
+
+        $this->assertEquals($ret, true);
+        $this->assertEquals($model->hasErrors(), false);
+    }
+
+    /** @test */
     public function testSaveValid()
     {
         /*

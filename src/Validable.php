@@ -52,6 +52,26 @@ trait Validable
     }
 
     /**
+     * Get all model attributes as associative array
+     * Date qttributes or with casts is cast to string representation
+     * @return array
+     */
+    public function getValidableAttributes()
+    {
+        //disable hidden and visible attributes beacause I need to validate all attributes
+        $hidden=$this->getHidden();
+        $visible=$this->getVisible();
+        $this->setHidden([]);
+        $this->setVisible([]);
+        //get attributes array with casts and datime casts
+        $attributes=$this->attributesToArray();
+        //restore hidden and visible attributes
+        $this->setHidden($hidden);
+        $this->setVisible($visible);
+        return $attributes;
+    }
+
+    /**
      * Validates current attributes against rules
      */
     public function validate()
@@ -60,7 +80,7 @@ trait Validable
             $this->setValidator(App::make('validator'));
         }
 
-        $v = $this->validator->make($this->attributes,
+        $v = $this->validator->make($this->getValidableAttributes(),
                                     $this->exists ? static::getUpdatingRules($this) : static::getCreatingRules(), static::getMessages());
         if ($v->passes()) {
             return true;

@@ -58,6 +58,13 @@ abstract class TestCase extends Orchestra
             $table->string('name')->nullable();
             $table->integer('order')->default(0);
         });
+
+        $app['db']->connection()->getSchemaBuilder()->create('test_models_with_dates', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable();
+            $table->date('date_test');
+            $table->dateTime('datetime_test');
+        });
     }
 
     protected function initializeDirectory(string $directory)
