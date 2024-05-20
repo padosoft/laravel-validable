@@ -2,11 +2,13 @@
 
 namespace Padosoft\Laravel\Validable\Test\Integration;
 
+use PHPUnit\Framework\Attributes\Test;
+
 class ValidableTest extends TestCase
 {
 
 
-    /** @test */
+    #[Test]
     public function testNotSaveInvalid()
     {
         /*
@@ -25,7 +27,7 @@ class ValidableTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function testSaveValidAttributesWithHiddenAttributes()
     {
         $model = new TestModelWithHiddenAttributes();
@@ -39,7 +41,7 @@ class ValidableTest extends TestCase
         $this->assertEquals($model->hasErrors(), false);
     }
 
-    /** @test */
+    #[Test]
     public function testSaveValidDatesAttributes()
     {
         $model = new TestModelWithDates();
@@ -56,7 +58,7 @@ class ValidableTest extends TestCase
         $this->assertEquals($model->hasErrors(), false);
     }
 
-    /** @test */
+    #[Test]
     public function testSaveValid()
     {
         /*
@@ -75,7 +77,7 @@ class ValidableTest extends TestCase
         $this->assertEquals($model->hasErrors(), false);
     }
 
-    /** @test */
+    #[Test]
     public function testNotSaveInvalidNotMandatory()
     {
         /*
@@ -95,7 +97,7 @@ class ValidableTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function testCanGetRulesAndMessagesOfAModel()
     {
         /*
@@ -110,7 +112,7 @@ class ValidableTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function testCanGetRulesSpecificRulesOfAModel()
     {
         /*
@@ -128,7 +130,7 @@ class ValidableTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function testUpdateRulesWithReplacement()
     {
         /*

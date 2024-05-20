@@ -24,10 +24,29 @@ abstract class TestCase extends Orchestra
 
     }
 
-    protected function tearDown(): void
+    protected function restoreExceptionHandler(): void
+    {
+        while (true) {
+            $previousHandler = set_exception_handler(static fn() => null);
+
+            restore_exception_handler();
+
+            if ($previousHandler === null) {
+                break;
+            }
+
+            restore_exception_handler();
+        }
+    }
+
+    protected function tearDown() : void
     {
         //remove created path during test
         //$this->removeCreatedPathDuringTest(__DIR__);
+        //$this->artisan('migrate:reset', ['--database' => 'testbench']);
+        parent::tearDown();
+
+        $this->restoreExceptionHandler();
     }
 
     /**
