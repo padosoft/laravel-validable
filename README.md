@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/padosoft/laravel-validable.svg?style=flat-square)](https://packagist.org/packages/padosoft/laravel-validable)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![CircleCI](https://circleci.com/gh/padosoft/laravel-validable/tree/master.svg?style=svg)](https://circleci.com/gh/padosoft/laravel-settings/tree/master)
+[![CircleCI](https://circleci.com/gh/padosoft/laravel-validable/tree/master.svg?style=svg)](https://circleci.com/gh/padosoft/laravel-validable/tree/master)
 [![Quality Score](https://img.shields.io/scrutinizer/g/padosoft/laravel-validable.svg?style=flat-square)](https://scrutinizer-ci.com/g/padosoft/laravel-validable)
 [![Total Downloads](https://img.shields.io/packagist/dt/padosoft/laravel-validable.svg?style=flat-square)](https://packagist.org/packages/padosoft/laravel-validable)
 
