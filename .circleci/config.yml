@@ -58,4 +58,5 @@ jobs:
             #- run: php artisan migrate --env=testing --database=sqlite_testing --force
 
             # run tests with phpunit or codecept
-            - run: ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+            #- run: ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+            - run: ./vendor/bin/phpunit
